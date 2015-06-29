@@ -11,6 +11,7 @@ void swap(int nums[],int start,int end,int d)
 	}
 }
 void rotateLeft(int* nums, int numsSize, int k) {
+	k = k%numsSize;
 	if(k==0 || k==numsSize)
 		return;
 	if(numsSize-k==k)
@@ -29,6 +30,7 @@ void rotateLeft(int* nums, int numsSize, int k) {
 }
 
 void rotateRight(int* nums, int numsSize, int k) {
+	k = k%numsSize;
 	if(k==0 || k==numsSize)
 		return;
 	if(numsSize-k==k)
@@ -36,13 +38,14 @@ void rotateRight(int* nums, int numsSize, int k) {
 		swap(nums,0,k,k);
 		return;
 	}
-	if(numsSize-k<k) {
-		swap(nums,0,k,numsSize-k);
-		rotateRight(nums,k,numsSize-k);
+	if(k<numsSize-k) {
+		swap(nums,0,numsSize-k,k);
+		rotateRight(nums+k,numsSize-k,k);
 	}
 	else {
-		swap(nums,0,numsSize-k,k);
-		rotateRight(nums+k,numsSize-k,numsSize-2*k);
+		swap(nums,0,k,numsSize-k);
+		rotateRight(nums,k,2*k-numsSize);
+		
 	}
 }
 
